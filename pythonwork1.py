@@ -31,9 +31,9 @@ try:
     true
     false
     #用raise来抛出异常
-    raise NameError  #("This is an nameerror")
-except NameError as e:
-    print 'NameError'     #pass就是什么都不做,不过通常这里会做一些恢复工作
+    #raise NameError  #("This is an nameerror")
+except Exception as e:
+    print e    #pass就是什么都不做,不过通常这里会做一些恢复工作
 
 
 #用not来取非
@@ -106,9 +106,8 @@ print "some_var = %s" % some_var
 #可以查看控制流程一节来了解如何异常处理
 try:
     print some_other_var  #抛出 NameError
-    raise NameError
-except NameError as e:
-    print "NameError: name'some_other_var' is not defined"
+except Exception as e:
+    print e
 
 #if 语句可以作为表达式来使用
 print "yahoo!" if 3 > 2 else 2  # 'yahoo!'
@@ -132,8 +131,8 @@ try:
     li[0]#1
     li[-1]#3
     li[4]#抛出越界异常
-except IndexError as e:
-    print "IndexError"
+except Exception as e:
+    print e
 
 #切片预发需要用到列表的索引访问
 #可以看做数学之中左闭右开区间 ##左闭右开##
@@ -163,8 +162,8 @@ try:
     tup = (1,2,3)
     tup[0] #1
     tup[0] = 3 #类型错误
-except TypeError as e:
-    print "TypeError"
+except Exception as e:
+    print e
 #大多数列表操作也适用于元祖tuple
 len(tup) #3
 tup + (4,5,6) #合并 (1,2,3,4,5,6)
@@ -199,8 +198,8 @@ filled_dict.values()  # [3,2,1] 和键的顺序相同
 #查询一个不存在的键会抛出keyerror
 try:
     filled_dict["four"]  #keyerror
-except KeyError as e:
-    print "KeyError"
+except Exception as e:
+    print e
 
 #用get方法来避免keyerror
 filled_dict.get("one")  # 1
