@@ -27,30 +27,36 @@ print 11.0/4.0  #2.75
 print (1+3)*2  #8
 
 #布尔值也是基本的数据类型
-true
-false
+try:
+    true
+    false
+    #用raise来抛出异常
+    raise NameError  #("This is an nameerror")
+except NameError as e:
+    print 'NameError'     #pass就是什么都不做,不过通常这里会做一些恢复工作
+
 
 #用not来取非
-not True
-not False
+print not True
+print not False
 
 #相等
-1 == 1 #True
-2 == 1 #False
+print 1 == 1 #True
+print 2 == 1 #False
 
 #不等
-1 != 1 #False
-2 != 1 #True
+print 1 != 1 #False
+print 2 != 1 #True
 
 #更多比较操作符
-1 < 10
-1 > 10
-2 <= 2
-2 >= 2
+print 1 < 10
+print 1 > 10
+print 2 <= 2
+print 2 >= 2
 
 #比较运算可以连起来写
-1 < 2 < 3  #True
-2 < 3 < 2  #False
+print 1 < 2 < 3  #True
+print 2 < 3 < 2  #False
 
 #字符串通过"或'括起来
 print "This is a string"
@@ -73,19 +79,19 @@ print "{0} can be {1}".format("strings","formatted")
 print "{name} wants to eat {food}".format(name="Bob",food="lasagna")
 
 #None是对象
-None #  None
+print None #  None
 
 #不要用相等'=='符号和None进行比较,要用'is'
-"etc" is None # False
-None is None # True
+print "etc" is None # False
+print None is None # True
 
 #'is'可以用来比较对象的相等性
 #这个操作符在比较原始数据时没用,比较对象必不可少
 
 #None, 0 ,和空字符串都被算作 False
 #其他均为True
-0 == False # True
-"" == False #True
+print 0 == False # True
+print "" == False #True
 
 #2.变量和集合
 
@@ -94,16 +100,19 @@ print "I'm Python.Nice to meet you!"
 
 #给变量赋值前不需要事先声明
 some_var = 5  #一般建议使用小写字母和下划线组合来作为变量名
-some_var
+print "some_var = %s" % some_var
 
 #访问未赋值的变量会抛出异常
 #可以查看控制流程一节来了解如何异常处理
-
-some_other_var #抛出 NameError
+try:
+    print some_other_var  #抛出 NameError
+    raise NameError
+except NameError as e:
+    print "NameError: name'some_other_var' is not defined"
 
 #if 语句可以作为表达式来使用
-"yahoo!" if 3 > 2 else 2  # 'yahoo!'
-"yahoo!" if 3 <= 2 else 2  # 2
+print "yahoo!" if 3 > 2 else 2  # 'yahoo!'
+print "yahoo!" if 3 <= 2 else 2  # 2
 
 #列表用来保存序列
 li = []
@@ -119,9 +128,12 @@ li.append(3)  #li = [1,2,4,3]
 li.pop()  #li = [1,2,4]
 li.append(3)  #li = [1,2,4,3] again
 #像其他语言访问数组一样访问列表
-li[0]  # 1
-li[-1]  # 3
-li[4]  #抛出越界异常
+try:
+    li[0]#1
+    li[-1]#3
+    li[4]#抛出越界异常
+except IndexError as e:
+    print "IndexError"
 
 #切片预发需要用到列表的索引访问
 #可以看做数学之中左闭右开区间 ##左闭右开##
@@ -135,7 +147,7 @@ li[:3]  #[1,2,4]
 del li[2] #li = [1,2,3]
 
 #合并列表
-li + other_li  #[1,2,3,4,5,6] 不会改变这两个列表
+print li + other_li  #[1,2,3,4,5,6] 不会改变这两个列表
 
 #通过拼接来合并列表
 li.extend(other_li)  #li = [1,2,3,4,5,6]
@@ -147,10 +159,12 @@ li.extend(other_li)  #li = [1,2,3,4,5,6]
 len(li)  # 6
 
 #元祖tuple类似于列表,但它是不可改变的
-tup = (1,2,3)
-tup[0] #1
-tup[0] = 3 #类型错误
-
+try:
+    tup = (1,2,3)
+    tup[0] #1
+    tup[0] = 3 #类型错误
+except TypeError as e:
+    print "TypeError"
 #大多数列表操作也适用于元祖tuple
 len(tup) #3
 tup + (4,5,6) #合并 (1,2,3,4,5,6)
@@ -183,7 +197,10 @@ filled_dict.values()  # [3,2,1] 和键的顺序相同
 1 in filled_dict # False
 
 #查询一个不存在的键会抛出keyerror
-filled_dict["four"]  #keyerror
+try:
+    filled_dict["four"]  #keyerror
+except KeyError as e:
+    print "KeyError"
 
 #用get方法来避免keyerror
 filled_dict.get("one")  # 1
@@ -259,7 +276,7 @@ for animal in ["dog","cat","mouse"]:
 3
 """
 
-for i in range(4)
+for i in range(4):
     print i
 
 """
@@ -305,7 +322,7 @@ def varargs(*args):
 varargs(1,2,3) #(1,2,3)
 
 #我们也可以定义接受多个变量的函数,这些变量是按照关键字排列的
-def keyword_args(**kwargs)
+def keyword_args(**kwargs):
     return kwargs
 
 #实际效果:
