@@ -1,6 +1,6 @@
 #这是用来做python作业的
 ##ipython安装
-```
+```bash
 source /usr/local/bin/virtualenvwrapper.sh #设置virtualenv使用的环境变量
 mkvirtualenv -p /usr/bin/python2.7 python-tutorial
 pip install ipython -i https://pypi.doubanio.com/simple
